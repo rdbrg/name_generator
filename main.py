@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import random
 import names_list
+import copypaste as cp
 
 
 class Main(tk.Tk):
@@ -34,6 +35,9 @@ class Main(tk.Tk):
         btn_generate = ttk.Button(self.main_frame, text="Generate", command=self.generate_name)
         btn_generate.grid(row=3, column=0, sticky=tk.W)
 
+        btn_copy = ttk.Button(self.main_frame, text="Copy", command=self.copy_output)
+        btn_copy.grid(row=3, column=1, sticky=tk.W)
+
     def generate_name(self):
         if self.var_ch.get() == "male":
             self.lab_output.configure(text=f"{random.choice(names_list.name_male_list)} "
@@ -41,6 +45,9 @@ class Main(tk.Tk):
         else:
             self.lab_output.configure(text=f"{random.choice(names_list.name_female_list)} "
                                            f"{random.choice(names_list.surname_female_list)}")
+
+    def copy_output(self):
+        cp.copy(self.lab_output.cget('text'))
 
 
 if __name__ == '__main__':
