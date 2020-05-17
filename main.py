@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import random
 import names_list
+import copypaste as cp
 
 
 class Main(tk.Tk):
@@ -10,7 +11,7 @@ class Main(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
         tk.Tk.title(self, "Name Generator")
         w = 300
-        h = 120
+        h = 130
         tk.Tk.geometry(self, f"{w}x{h}")
         tk.Tk.resizable(self, False, False)
 
@@ -34,6 +35,9 @@ class Main(tk.Tk):
         btn_generate = ttk.Button(self.main_frame, text="Generate", command=self.generate_name)
         btn_generate.grid(row=3, column=0, sticky=tk.W)
 
+        self.lab_status_bar = ttk.Label(self, text="Press Generate", relief=tk.SUNKEN)
+        self.lab_status_bar.pack(side=tk.LEFT, expand=1, fill=tk.X)
+
     def generate_name(self):
         if self.var_ch.get() == "male":
             self.lab_output.configure(text=f"{random.choice(names_list.name_male_list)} "
@@ -41,6 +45,8 @@ class Main(tk.Tk):
         else:
             self.lab_output.configure(text=f"{random.choice(names_list.name_female_list)} "
                                            f"{random.choice(names_list.surname_female_list)}")
+
+        self.lab_status_bar.configure(text="Press Copy")
 
 
 if __name__ == '__main__':
