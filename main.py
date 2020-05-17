@@ -38,6 +38,9 @@ class Main(tk.Tk):
         self.lab_status_bar = ttk.Label(self, text="Press Generate", relief=tk.SUNKEN)
         self.lab_status_bar.pack(side=tk.LEFT, expand=1, fill=tk.X)
 
+        btn_copy = ttk.Button(self.main_frame, text="Copy", command=self.copy_output)
+        btn_copy.grid(row=3, column=1, sticky=tk.W)
+
     def generate_name(self):
         if self.var_ch.get() == "male":
             self.lab_output.configure(text=f"{random.choice(names_list.name_male_list)} "
@@ -47,6 +50,10 @@ class Main(tk.Tk):
                                            f"{random.choice(names_list.surname_female_list)}")
 
         self.lab_status_bar.configure(text="Press Copy")
+
+    def copy_output(self):
+        cp.copy(self.lab_output.cget('text'))
+        self.lab_status_bar.configure(text="Name copy to clipboard")
 
 
 if __name__ == '__main__':
